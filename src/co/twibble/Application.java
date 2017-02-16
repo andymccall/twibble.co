@@ -6,8 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * The Application class is a class the entry point to the program
- * address.
+ * The Application class is the entry point to the main program
  *
  * @author  Andy McCall
  * @version 0.1
@@ -27,4 +26,5 @@ public class Application {
 
         logger.info("Exiting main()");
     }
+
 }
