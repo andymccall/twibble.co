@@ -1,12 +1,18 @@
 package co.twibble;
 
-/**
- * Created by andymccall on 16/02/2017.
- */
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+/**
+ * The Application class is a class the entry point to the program
+ * address.
+ *
+ * @author  Andy McCall
+ * @version 0.1
+ * @since   2017-02-16
+ */
 
 @SpringBootApplication
 public class Application {
