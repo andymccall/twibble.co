@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class TwibbleController {
 
-    @RequestMapping(value = { "/" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/", "index" }, method = RequestMethod.GET)
     public String homepage(Model model) {
 
         Post post = new Post();
@@ -27,6 +27,24 @@ public class TwibbleController {
         model.addAttribute("post", post);
 
         return "index";
+    }
+
+    @RequestMapping(value = { "about" }, method = RequestMethod.GET)
+    public String about(Model model) {
+
+        return "about";
+    }
+
+    @RequestMapping(value = { "contact" }, method = RequestMethod.GET)
+    public String contact(Model model) {
+
+        return "contact";
+    }
+
+    @RequestMapping(value = { "post" }, method = RequestMethod.GET)
+    public String post(Model model) {
+
+        return "post";
     }
 
 }
