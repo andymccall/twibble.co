@@ -1,6 +1,6 @@
 package co.twibble.controller;
 
-import co.twibble.model.Post;
+import co.twibble.model.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,12 +19,12 @@ public class TwibbleController {
     @RequestMapping(value = { "/", "index" }, method = RequestMethod.GET)
     public String homepage(Model model) {
 
-        Post post = new Post();
+        Configuration configuration = new Configuration();
 
-        post.setPostTitle("First blog entry...");
-        post.setPostContents("This is the first post!");
-
-        model.addAttribute("post", post);
+        configuration.setBlogTitle("Twibble");
+        configuration.setBlogTagLine("A blogging platform written in Java");
+        
+        model.addAttribute("configuration", configuration);
 
         return "index";
     }

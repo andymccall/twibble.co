@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
@@ -42,7 +42,7 @@
                     <span class="sr-only">Toggle navigation</span>
                     Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="index.html">Twibble</a>
+                <a class="navbar-brand" href="index.html" th:text="${configuration.blogTitle}"></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -74,9 +74,9 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="site-heading">
-                        <h1>Twibble</h1>
+                        <h1 th:text="${configuration.blogTitle}"></h1>
                         <hr class="small"></hr>
-                        <span class="subheading">A blogging platform written in Java</span>
+                        <span class="subheading" th:text="${configuration.blogTagLine}"></span>
                     </div>
                 </div>
             </div>
