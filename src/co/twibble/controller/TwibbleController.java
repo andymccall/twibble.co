@@ -1,5 +1,6 @@
 package co.twibble.controller;
 
+import co.twibble.model.Post;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,14 @@ public class TwibbleController {
     @RequestMapping(value = { "/" }, method = RequestMethod.GET)
     public String homepage(Model model) {
 
-        return "index.html";
+        Post post = new Post();
+
+        post.setPostTitle("First blog entry...");
+        post.setPostContents("This is the first post!");
+
+        model.addAttribute("post", post);
+
+        return "index";
     }
 
 }
