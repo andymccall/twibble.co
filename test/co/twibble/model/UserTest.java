@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
  * The UserTest class checks the getters and setters of the User class
  *
  * @author  Andy McCall
- * @version 0.1
+ * @version 0.2
  * @since   2017-02-16
  */
 
@@ -131,7 +131,7 @@ public class UserTest {
 
     @Test
     public void test_toString_Passes() throws Exception {
-        assertEquals("toString failed!","User{id=1, firstName='FirstName1', lastName='LastName1', userName='userName1', emailAddress='firstname.lastname@domain.com', password='HjmajH7', userType='ADMINISTRATOR'}", classUserUnderTest.toString());
+        assertEquals("toString failed!","User{id=1, firstName='FirstName1', lastName='LastName1', userName='userName1', displayName='null', emailAddress='firstname.lastname@domain.com', password='HjmajH7', userType=ADMINISTRATOR, userStatus=null}", classUserUnderTest.toString());
     }
 
 }
