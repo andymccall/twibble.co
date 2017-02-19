@@ -18,6 +18,7 @@ public class Post {
     private String postTitle;
     private String postContents;
     private Date postDate;
+    private User postUser;
 
     public String getPostTitle() {
         return postTitle;
@@ -43,12 +44,21 @@ public class Post {
         this.postDate = postDate;
     }
 
+    public User getPostUser() {
+        return postUser;
+    }
+
+    public void setPostUser(User postUser) {
+        this.postUser = postUser;
+    }
+
     @Override
     public String toString() {
         return "Post{" +
                 "postTitle='" + postTitle + '\'' +
-                "postContents='" + postContents + '\'' +
+                ", postContents='" + postContents + '\'' +
                 ", postDate=" + postDate +
+                ", postUser=" + postUser +
                 '}';
     }
 }
