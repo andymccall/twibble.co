@@ -16,9 +16,11 @@ public class User {
     private String firstName;
     private String lastName;
     private String userName;
+    private String displayName;
     private String emailAddress;
     private String password;
     private UserType userType;
+    private UserStatus userStatus;
 
     public int getId() {
         return id;
@@ -52,6 +54,14 @@ public class User {
         this.userName = userName;
     }
 
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
     public String getEmailAddress() {
         return emailAddress;
     }
@@ -76,6 +86,14 @@ public class User {
         this.userType = userType;
     }
 
+    public UserStatus getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(UserStatus userStatus) {
+        this.userStatus = userStatus;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -83,9 +101,11 @@ public class User {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", userName='" + userName + '\'' +
+                ", displayName='" + displayName + '\'' +
                 ", emailAddress='" + emailAddress + '\'' +
                 ", password='" + password + '\'' +
-                ", userType='" + userType + '\'' +
+                ", userType=" + userType +
+                ", userStatus=" + userStatus +
                 '}';
     }
 }

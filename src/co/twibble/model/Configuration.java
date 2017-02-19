@@ -18,6 +18,7 @@ public class Configuration {
     private String blogTitle;
     private String blogTagLine;
     private String blogBaseURL;
+    private int numberOfPostsToDisplay;
 
     public String getBlogTitle() {
         return blogTitle;
@@ -43,12 +44,21 @@ public class Configuration {
         this.blogBaseURL = blogBaseURL;
     }
 
+    public int getNumberOfPostsToDisplay() {
+        return numberOfPostsToDisplay;
+    }
+
+    public void setNumberOfPostsToDisplay(int numberOfPostsToDisplay) {
+        this.numberOfPostsToDisplay = numberOfPostsToDisplay;
+    }
+
     @Override
     public String toString() {
         return "Configuration{" +
                 "blogId=" + blogId +
                 ", blogTitle='" + blogTitle + '\'' +
                 ", blogBaseURL='" + blogBaseURL + '\'' +
+                ", numberOfPostsToDisplay='" + numberOfPostsToDisplay + '\'' +
                 '}';
     }
 }

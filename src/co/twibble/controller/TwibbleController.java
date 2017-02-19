@@ -14,20 +14,23 @@ import java.util.ArrayList;
  * The TwibbleController class is the controller for the home page
  *
  * @author  Andy McCall
- * @version 0.1
+ * @version 0.2
  * @since   2017-02-16
  */
 @Controller
 public class TwibbleController {
 
-    @RequestMapping(value = { "/", "index" }, method = RequestMethod.GET)
-    public String homepage(Model model) {
+    Configuration configuration = new Configuration();
 
-        Configuration configuration = new Configuration();
-
+    public TwibbleController() {
         configuration.setBlogTitle("Twibble");
         configuration.setBlogTagLine("A blogging platform written in Java");
         configuration.setBlogBaseURL("http://localhost:8080/index.html");
+    }
+
+    @RequestMapping(value = { "/", "index" }, method = RequestMethod.GET)
+    public String homepage(Model model) {
+
         model.addAttribute("configuration", configuration);
 
         User user = new User();
@@ -77,6 +80,14 @@ public class TwibbleController {
     public String post(Model model) {
 
         return "post";
+    }
+
+    @RequestMapping(value = { "admin/general" }, method = RequestMethod.GET)
+    public String adminGeneral(Model model) {
+
+        model.addAttribute("configuration", configuration);
+
+        return "admin/general";
     }
 
 }
