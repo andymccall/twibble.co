@@ -5,8 +5,11 @@ import co.twibble.model.Post;
 import co.twibble.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 
@@ -88,6 +91,16 @@ public class TwibbleController {
         model.addAttribute("configuration", configuration);
 
         return "admin/general";
+    }
+
+    @RequestMapping(value = "admin/general", method = RequestMethod.POST)
+    public String saveAdminGeneral(@ModelAttribute("Configuration") Configuration updatedConfiguration) {
+
+        configuration.setBlogTitle(updatedConfiguration.getBlogTitle());
+        configuration.setBlogTagLine(updatedConfiguration.getBlogTagLine());
+
+        return "redirect:/admin/general";
+
     }
 
 }

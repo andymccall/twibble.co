@@ -81,14 +81,34 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <form th:object="${litlioEntry}" th:action="@{/entry}" method="POST">
+            <form th:object="${configuration}" th:action="@{/admin/general}" method="POST">
                 <div class="form-group row">
                     <label for="blogTitle" class="col-2 col-form-label">Blog Title</label>
                     <div class="col-10">
-                        <input class="form-control" type="text" value="Twibble" id="blogTitle"/>
+                        <input class="form-control" type="text" th:value="${configuration.blogTitle}" th:field="*{blogTitle}" id="blogTitle"/>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Save</button>
+
+                <div class="form-group row">
+                    <label for="blogTagLine" class="col-2 col-form-label">Blog Tag Line</label>
+                    <div class="col-10">
+                        <input class="form-control" type="text" th:value="${configuration.blogTagLine}" th:field="*{blogTagLine}" id="blogTagLine"/>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="blogBaseURL" class="col-2 col-form-label">Blog Base URL</label>
+                    <div class="col-10">
+                        <input class="form-control" type="text" th:value="${configuration.blogBaseURL}" th:field="*{blogBaseURL}" id="blogBaseURL"/>
+                    </div>
+                </div>
+
+                <!-- Pager -->
+                <ul class="pager">
+                    <li class="next">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </li>
+                </ul>
             </form>
         </div>
     </div>
