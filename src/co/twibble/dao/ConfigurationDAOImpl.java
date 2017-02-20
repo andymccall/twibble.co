@@ -1,7 +1,14 @@
 package co.twibble.dao;
 
+import org.springframework.stereotype.Repository;
+
 /**
- * Created by andymccall on 19/02/2017.
+ * The ConfigurationDAOImpl class
+ *
+ * @author  Andy McCall
+ * @version 0.1
+ * @since   2017-02-20
  */
-public class ConfigurationDAOImpl implements ConfigurationDAO {
+@Repository("configurationDAO")
+public class ConfigurationDAOImpl extends AbstractDAO implements ConfigurationDAO {
 }

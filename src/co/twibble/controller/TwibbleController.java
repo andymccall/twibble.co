@@ -3,6 +3,10 @@ package co.twibble.controller;
 import co.twibble.model.Configuration;
 import co.twibble.model.Post;
 import co.twibble.model.User;
+import co.twibble.service.ConfigurationService;
+import co.twibble.service.PostService;
+import co.twibble.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,15 +26,35 @@ import java.util.ArrayList;
 public class TwibbleController {
 
     Configuration configuration = new Configuration();
+    User user = new User();
 
     ArrayList<Post> posts = new ArrayList();
+
+
+    ConfigurationService configurationService;
+    UserService userService;
+    PostService postService;
+
+    @Autowired
+    public void setConfigurationService(ConfigurationService configurationService) {
+        this.configurationService = configurationService;
+    }
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    @Autowired
+    public void setPostService(PostService postService) {
+        this.postService = postService;
+    }
 
     public TwibbleController() {
         configuration.setBlogTitle("Twibble");
         configuration.setBlogTagLine("A blogging platform written in Java");
         configuration.setBlogBaseURL("http://localhost:8080/index.html");
 
-        User user = new User();
         user.setFirstName("Andy");
         user.setLastName("McCall");
         user.setUserName("andymccall");
@@ -93,12 +117,6 @@ public class TwibbleController {
     @RequestMapping(value = "admin/post", method = RequestMethod.POST)
     public String saveAdminPost(@ModelAttribute("Post") Post newPost) {
 
-        User user = new User();
-        user.setFirstName("Andy");
-        user.setLastName("McCall");
-        user.setUserName("andymccall");
-        user.setEmailAddress("mailme@andymccall.co.uk");
-
         Post post = new Post();
         post.setPostTitle(newPost.getPostTitle());
         post.setPostContents(newPost.getPostContents());
@@ -107,6 +125,29 @@ public class TwibbleController {
         posts.add(post);
 
         return "redirect:/index";
+
+    }
+
+    @RequestMapping(value = { "admin/user" }, method = RequestMethod.GET)
+    public String adminUser(Model model) {
+
+        User newUser = new User();
+        model.addAttribute("user", newUser);
+        model.addAttribute("configuration", configuration);
+
+        return "admin/user";
+    }
+
+    @RequestMapping(value = "admin/user", method = RequestMethod.POST)
+    public String saveAdminUser(@ModelAttribute("User") User newUser) {
+
+        user.setFirstName(newUser.getFirstName());
+        user.setLastName(newUser.getLastName());
+        user.setUserName(newUser.getUserName());
+        user.setDisplayName(newUser.getDisplayName());
+        user.setEmailAddress(newUser.getEmailAddress());
+
+        return "redirect:/admin/user";
 
     }
 
@@ -119,10 +160,10 @@ public class TwibbleController {
     }
 
     @RequestMapping(value = "admin/general", method = RequestMethod.POST)
-    public String saveAdminGeneral(@ModelAttribute("Configuration") Configuration updatedConfiguration) {
+    public String saveAdminGeneral(@ModelAttribute("Configuration") Configuration newConfiguration) {
 
-        configuration.setBlogTitle(updatedConfiguration.getBlogTitle());
-        configuration.setBlogTagLine(updatedConfiguration.getBlogTagLine());
+        configuration.setBlogTitle(newConfiguration.getBlogTitle());
+        configuration.setBlogTagLine(newConfiguration.getBlogTagLine());
 
         return "redirect:/admin/general";
 
