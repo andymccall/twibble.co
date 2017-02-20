@@ -5,11 +5,9 @@ import co.twibble.model.Post;
 import co.twibble.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 
@@ -17,7 +15,7 @@ import java.util.ArrayList;
  * The TwibbleController class is the controller for the home page
  *
  * @author  Andy McCall
- * @version 0.2
+ * @version 0.3
  * @since   2017-02-16
  */
 @Controller
@@ -25,24 +23,18 @@ public class TwibbleController {
 
     Configuration configuration = new Configuration();
 
+    ArrayList<Post> posts = new ArrayList();
+
     public TwibbleController() {
         configuration.setBlogTitle("Twibble");
         configuration.setBlogTagLine("A blogging platform written in Java");
         configuration.setBlogBaseURL("http://localhost:8080/index.html");
-    }
-
-    @RequestMapping(value = { "/", "index" }, method = RequestMethod.GET)
-    public String homepage(Model model) {
-
-        model.addAttribute("configuration", configuration);
 
         User user = new User();
         user.setFirstName("Andy");
         user.setLastName("McCall");
         user.setUserName("andymccall");
         user.setEmailAddress("mailme@andymccall.co.uk");
-
-        ArrayList<Post> posts = new ArrayList();
 
         Post post = new Post();
         post.setPostTitle("Test Blog Post 1");
@@ -62,6 +54,12 @@ public class TwibbleController {
         post3.setPostUser(user);
         posts.add(post3);
 
+    }
+
+    @RequestMapping(value = { "/", "index" }, method = RequestMethod.GET)
+    public String homepage(Model model) {
+
+        model.addAttribute("configuration", configuration);
         model.addAttribute("posts", posts);
 
         return "index";
@@ -79,10 +77,37 @@ public class TwibbleController {
         return "contact";
     }
 
-    @RequestMapping(value = { "post" }, method = RequestMethod.GET)
-    public String post(Model model) {
+    @RequestMapping(value = { "admin/post" }, method = RequestMethod.GET)
+    public String adminPost(Model model) {
 
-        return "post";
+        Post post = new Post();
+        post.setPostTitle("Enter the title here...");
+        post.setPostContents("Enter the contents here...");
+
+        model.addAttribute("configuration", configuration);
+        model.addAttribute("post", post);
+
+        return "admin/post";
+    }
+
+    @RequestMapping(value = "admin/post", method = RequestMethod.POST)
+    public String saveAdminPost(@ModelAttribute("Post") Post newPost) {
+
+        User user = new User();
+        user.setFirstName("Andy");
+        user.setLastName("McCall");
+        user.setUserName("andymccall");
+        user.setEmailAddress("mailme@andymccall.co.uk");
+
+        Post post = new Post();
+        post.setPostTitle(newPost.getPostTitle());
+        post.setPostContents(newPost.getPostContents());
+        post.setPostUser(user);
+
+        posts.add(post);
+
+        return "redirect:/index";
+
     }
 
     @RequestMapping(value = { "admin/general" }, method = RequestMethod.GET)
