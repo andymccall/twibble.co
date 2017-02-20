@@ -40,15 +40,16 @@ public class TwibbleController {
         this.configurationService = configurationService;
     }
 
-    @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
-
-    @Autowired
-    public void setPostService(PostService postService) {
-        this.postService = postService;
-    }
+// TODO: Uncomment once UserService/DAO and PostService/DAO are implemented
+//    @Autowired
+//    public void setUserService(UserService userService) {
+//        this.userService = userService;
+//    }
+//
+//    @Autowired
+//    public void setPostService(PostService postService) {
+//        this.postService = postService;
+//    }
 
     public TwibbleController() {
         configuration.setBlogTitle("Twibble");
