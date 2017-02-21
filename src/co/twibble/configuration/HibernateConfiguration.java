@@ -36,7 +36,7 @@ public class HibernateConfiguration {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan(new String[]{"co.twibble.model"});
+        sessionFactory.setPackagesToScan("co.twibble.model");
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
     }

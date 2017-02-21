@@ -1,5 +1,7 @@
 package co.twibble.service;
 
+import co.twibble.model.Configuration;
+
 /**
  * The ConfigurationService interface
  *
@@ -8,4 +10,6 @@ package co.twibble.service;
  * @since   2017-02-20
  */
 public interface ConfigurationService {
+    public void addConfiguration(Configuration configuration);
+    public Configuration getConfiguration();
 }

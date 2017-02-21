@@ -22,8 +22,8 @@ public abstract class AbstractDAO {
         return sessionFactory.getCurrentSession();
     }
 
-    public void persist(Configuration configuration) {
-        getSession().persist(configuration);
+    public void persist(Configuration entity) {
+        getSession().persist(entity);
     }
 
     public void delete(Object entity) {

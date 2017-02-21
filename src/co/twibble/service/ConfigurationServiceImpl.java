@@ -1,6 +1,7 @@
 package co.twibble.service;
 
 import co.twibble.dao.ConfigurationDAO;
+import co.twibble.model.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +23,14 @@ public class ConfigurationServiceImpl implements ConfigurationService {
     public void setConfigurationDAO(ConfigurationDAO configurationDAO) {
 
         this.configurationDAO = configurationDAO;
+    }
+
+    public void addConfiguration(Configuration configuration) {
+        configurationDAO.addConfiguation(configuration);
+
+    }
+    public Configuration getConfiguration() {
+        return configurationDAO.getConfiguration();
     }
 
 }

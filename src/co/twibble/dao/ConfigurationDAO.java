@@ -1,5 +1,7 @@
 package co.twibble.dao;
 
+import co.twibble.model.Configuration;
+
 /**
  * The ConfigurationDAO class
  *
@@ -8,4 +10,6 @@ package co.twibble.dao;
  * @since   2017-02-20
  */
 public interface ConfigurationDAO {
+    public void addConfiguation(Configuration configuration);
+    public Configuration getConfiguration();
 }

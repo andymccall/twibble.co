@@ -1,7 +1,7 @@
 package co.twibble.dao;
 
+import co.twibble.model.Configuration;
 import org.springframework.stereotype.Repository;
-
 /**
  * The ConfigurationDAOImpl class
  *
@@ -11,4 +11,13 @@ import org.springframework.stereotype.Repository;
  */
 @Repository("configurationDAO")
 public class ConfigurationDAOImpl extends AbstractDAO implements ConfigurationDAO {
+
+    public void addConfiguation(Configuration configuration) {
+
+    }
+    public Configuration getConfiguration() {
+
+        return new Configuration();
+    }
+
 }

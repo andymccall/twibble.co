@@ -1,20 +1,28 @@
 package co.twibble.model;
 
+import javax.persistence.*;
+
 /**
  * The Configuration class is the class that holds options
  * about the blog, such as its Title and URL
  *
  * @author  Andy McCall
- * @version 0.1
+ * @version 0.2
  * @since   2017-02-18
  */
 
 //** TODO: Document Configuration class with JavaDoc
 //** TODO: Unit tests for Configuration class
 
+@Entity
+@Table(name = "configuration")
 public class Configuration {
 
+    @Id
+    @GeneratedValue
+    @Column(name = "blogId")
     private int blogId;
+
     private String blogTitle;
     private String blogTagLine;
     private String blogBaseURL;

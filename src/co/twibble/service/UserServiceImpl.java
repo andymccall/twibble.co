@@ -1,8 +1,5 @@
 package co.twibble.service;
 
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 /**
  * The UserServiceImpl class
  *
@@ -10,7 +7,5 @@ import org.springframework.transaction.annotation.Transactional;
  * @version 0.1
  * @since   2017-02-20
  */
-@Service("userService")
-@Transactional
 public class UserServiceImpl implements UserService {
 }
