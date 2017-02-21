@@ -6,7 +6,7 @@
 
     <groupId>co.twibble</groupId>
     <artifactId>twibbleco</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>twibble.co</name>
@@ -118,7 +118,7 @@
                 <version>0.7.8</version>
                 <executions>
                     <execution>
-                        <userId>prepare-integration-tests</userId>
+                        <id>prepare-integration-tests</id>
                         <phase>pre-integration-test</phase>
                         <goals>
                             <goal>prepare-agent</goal>
@@ -128,7 +128,7 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <userId>jacoco-site</userId>
+                        <id>jacoco-site</id>
                         <phase>post-integration-test</phase>
                         <goals>
                             <goal>report</goal>
