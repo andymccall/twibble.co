@@ -63,8 +63,17 @@ public class TwibbleController {
         user.setUserType(UserType.ADMINISTRATOR);
 
         Post post = new Post();
-        post.setPostTitle("Test Blog Post 1");
-        post.setPostContents("This is the first blog post, within Twibble.");
+        post.setPostTitle("Very Berry Smoothie");
+        post.setPostContents("<p>The recipe for the smoothie I've been having most mornings is:</p>" +
+                "<ul>" +
+                "<li>Half a cup of blueberries</li>" +
+                "<li>Half a cup of raspberries</li>" +
+                "<li>Half a cup of strawberries</li>" +
+                "<li>Half a cup of curly kale</li>" +
+                "<li>Two desert spoons of plain yoghurt</li>" +
+                "<li>A cup of almond milk</li>" +
+                "</ul>" +
+                "<p>Blend in blender or smoothie maker for 60 seconds.  Chill before drinking.  Watch out for kale and strawberry seeds in-between your teeth after drinking!</p>");
         post.setPostUser(user);
         posts.add(post);
 

@@ -31,6 +31,16 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <script src='/includes/tinymce/tinymce.min.js'></script>
+    <script>
+        tinymce.init({
+            content_css: '/includes/clean-blog/css/clean-blog.css',
+            selector: '#postEditor',
+            toolbar: 'undo redo styleselect bold italic alignleft aligncenter alignright bullist numlist outdent indent code lists advlist',
+            plugins: 'code lists advlist',
+            height : 300
+        });
+    </script>
 </head>
 
 <body>
@@ -92,7 +102,7 @@
                 <div class="form-group row">
                     <label for="postContents" class="col-2 col-form-label">Post Content</label>
                     <div class="col-10">
-                        <input class="form-control" type="text" th:value="${post.postContents}" th:field="*{postContents}" userId="postContents"/>
+                        <textarea id="postEditor" th:value="${post.postContents}" th:field="*{postContents}" userId="postContents"/>
                     </div>
                 </div>
 
