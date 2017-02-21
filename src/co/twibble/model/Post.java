@@ -15,10 +15,19 @@ import java.util.Date;
 
 public class Post {
 
+    private int postId;
     private String postTitle;
     private String postContents;
     private Date postDate;
     private User postUser;
+
+    public int getPostId() {
+        return postId;
+    }
+
+    public void setPostId(int postId) {
+        this.postId = postId;
+    }
 
     public String getPostTitle() {
         return postTitle;
