@@ -1,8 +1,6 @@
 package co.twibble.controller;
 
-import co.twibble.model.Configuration;
-import co.twibble.model.Post;
-import co.twibble.model.User;
+import co.twibble.model.*;
 import co.twibble.service.ConfigurationService;
 import co.twibble.service.PostService;
 import co.twibble.service.UserService;
@@ -41,10 +39,10 @@ public class TwibbleController {
     }
 
 // TODO: Uncomment once UserService/DAO and PostService/DAO are implemented
-//    @Autowired
-//    public void setUserService(UserService userService) {
-//        this.userService = userService;
-//    }
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 //
 //    @Autowired
 //    public void setPostService(PostService postService) {
@@ -60,6 +58,9 @@ public class TwibbleController {
         user.setLastName("McCall");
         user.setUserName("andymccall");
         user.setEmailAddress("mailme@andymccall.co.uk");
+        user.setDisplayName("Andy McCall");
+        user.setUserStatus(UserStatus.ACTIVE);
+        user.setUserType(UserType.ADMINISTRATOR);
 
         Post post = new Post();
         post.setPostTitle("Test Blog Post 1");
@@ -147,6 +148,8 @@ public class TwibbleController {
         user.setUserName(newUser.getUserName());
         user.setDisplayName(newUser.getDisplayName());
         user.setEmailAddress(newUser.getEmailAddress());
+
+        userService.addUser(user);
 
         return "redirect:/admin/user";
 

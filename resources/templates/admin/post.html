@@ -49,7 +49,7 @@
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse" userId="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a th:href="${configuration.BlogBaseURL}">Home</a>
@@ -85,14 +85,14 @@
                 <div class="form-group row">
                     <label for="postTitle" class="col-2 col-form-label">Post Title</label>
                     <div class="col-10">
-                        <input class="form-control" type="text" th:value="${post.postTitle}" th:field="*{postTitle}" id="postTitle"/>
+                        <input class="form-control" type="text" th:value="${post.postTitle}" th:field="*{postTitle}" userId="postTitle"/>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="postContents" class="col-2 col-form-label">Post Content</label>
                     <div class="col-10">
-                        <input class="form-control" type="text" th:value="${post.postContents}" th:field="*{postContents}" id="postContents"/>
+                        <input class="form-control" type="text" th:value="${post.postContents}" th:field="*{postContents}" userId="postContents"/>
                     </div>
                 </div>
 

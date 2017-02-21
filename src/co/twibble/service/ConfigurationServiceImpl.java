@@ -29,6 +29,7 @@ public class ConfigurationServiceImpl implements ConfigurationService {
         configurationDAO.addConfiguation(configuration);
 
     }
+
     public Configuration getConfiguration() {
         return configurationDAO.getConfiguration();
     }

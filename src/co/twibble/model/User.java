@@ -1,5 +1,7 @@
 package co.twibble.model;
 
+import javax.persistence.*;
+
 /**
  * The User class is the super class for all users
  *
@@ -10,24 +12,47 @@ package co.twibble.model;
 
 //** TODO: Document User class with JavaDoc
 
+@Entity
+@Table(name = "tw_user")
 public class User {
 
-    private int id;
+    @Id
+    @GeneratedValue
+    @Column(name = "userId")
+    private int userId;
+
+    @Column(name = "firstName")
     private String firstName;
+
+    @Column(name = "lastName")
     private String lastName;
+
+    @Column(name = "userName")
     private String userName;
+
+    @Column(name = "displayName")
     private String displayName;
+
+    @Column(name = "emailAddress")
     private String emailAddress;
+
+    @Column(name = "password")
     private String password;
+
+    @Column(name = "userType")
+    @Enumerated(EnumType.STRING)
     private UserType userType;
+
+    @Column(name = "userStatus")
+    @Enumerated(EnumType.STRING)
     private UserStatus userStatus;
 
-    public int getId() {
-        return id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getFirstName() {
@@ -97,7 +122,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "userId=" + userId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", userName='" + userName + '\'' +

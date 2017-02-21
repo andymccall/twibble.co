@@ -23,7 +23,7 @@ public class UserTest {
 
     @Before
     public void setUp() {
-        classUserUnderTest.setId(1);
+        classUserUnderTest.setUserId(1);
         classUserUnderTest.setFirstName("FirstName1");
         classUserUnderTest.setLastName("LastName1");
         classUserUnderTest.setUserName("userName1");
@@ -36,7 +36,7 @@ public class UserTest {
     @Test
     public void test_new_user_is_empty() throws Exception {
         User userUnderTest = new User();
-        assertEquals(0,userUnderTest.getId());
+        assertEquals(0,userUnderTest.getUserId());
         assertNull(userUnderTest.getFirstName());
         assertNull(userUnderTest.getLastName());
         assertNull(userUnderTest.getUserName());
@@ -47,14 +47,14 @@ public class UserTest {
 
     @Test
     public void test_getId_Passes() throws Exception {
-        assertEquals("getId has failed!",1,classUserUnderTest.getId());
+        assertEquals("getUserId has failed!",1,classUserUnderTest.getUserId());
     }
 
     @Test
     public void test_setId_Passes() throws Exception {
         User userUnderTest = new User();
-        userUnderTest.setId(2);
-        assertEquals("setId has failed!",2,userUnderTest.getId());
+        userUnderTest.setUserId(2);
+        assertEquals("setUserId has failed!",2,userUnderTest.getUserId());
     }
 
     @Test
@@ -131,7 +131,7 @@ public class UserTest {
 
     @Test
     public void test_toString_Passes() throws Exception {
-        assertEquals("toString failed!","User{id=1, firstName='FirstName1', lastName='LastName1', userName='userName1', displayName='null', emailAddress='firstname.lastname@domain.com', password='HjmajH7', userType=ADMINISTRATOR, userStatus=null}", classUserUnderTest.toString());
+        assertEquals("toString failed!","User{userId=1, firstName='FirstName1', lastName='LastName1', userName='userName1', displayName='null', emailAddress='firstname.lastname@domain.com', password='HjmajH7', userType=ADMINISTRATOR, userStatus=null}", classUserUnderTest.toString());
     }
 
 }
