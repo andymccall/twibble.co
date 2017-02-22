@@ -1,5 +1,6 @@
 package co.twibble.model;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -13,12 +14,26 @@ import java.util.Date;
 //** TODO: Document Post class with JavaDoc
 //** TODO: Unit tests for Post class
 
+@Entity
+@Table(name = "tw_post")
 public class Post {
 
+    @Id
+    @GeneratedValue
+    @Column(name = "postId")
     private int postId;
+
+    @Column(name = "postTitle")
     private String postTitle;
+
+    @Column(name = "postContents")
     private String postContents;
+
+    @Column(name = "postDate")
     private Date postDate;
+
+    @ManyToOne
+    @JoinColumn(name="userId")
     private User postUser;
 
     public int getPostId() {

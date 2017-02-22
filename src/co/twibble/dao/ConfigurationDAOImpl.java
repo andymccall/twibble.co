@@ -27,7 +27,6 @@ public class ConfigurationDAOImpl extends AbstractDAO implements ConfigurationDA
         Criteria criteria = getSession().createCriteria(Configuration.class);
         criteria.add(Restrictions.eq("blogId",blogId));
         return (Configuration) criteria.uniqueResult();
-
     }
 
 }

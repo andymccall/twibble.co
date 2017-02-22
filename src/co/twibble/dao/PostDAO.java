@@ -1,7 +1,19 @@
 package co.twibble.dao;
 
+import co.twibble.model.Post;
+
+import java.util.List;
+
 /**
- * Created by andymccall on 19/02/2017.
+ * The UserDAO class
+ *
+ * @author  Andy McCall
+ * @version 0.1
+ * @since   2017-02-22
  */
 public interface PostDAO {
+    public void addPost(Post post);
+    public void updatePost(Post post);
+    public Post getPostById(int postId);
+    public List<Post> getRecentPosts(int numberOfPosts);
 }

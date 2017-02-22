@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The TwibbleController class is the controller for the home page
@@ -26,8 +27,6 @@ public class TwibbleController {
     Configuration configuration = new Configuration();
     User user = new User();
 
-    ArrayList<Post> posts = new ArrayList();
-
     ConfigurationService configurationService;
     UserService userService;
     PostService postService;
@@ -38,58 +37,24 @@ public class TwibbleController {
         configuration = configurationService.getConfiguration(1);
     }
 
-// TODO: Uncomment once UserService/DAO and PostService/DAO are implemented
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
+        user = userService.getUserByUserName("andymccall");
     }
-//
-//    @Autowired
-//    public void setPostService(PostService postService) {
-//        this.postService = postService;
-//    }
 
-    public TwibbleController() {
-
-        user.setFirstName("Andy");
-        user.setLastName("McCall");
-        user.setUserName("andymccall");
-        user.setEmailAddress("mailme@andymccall.co.uk");
-        user.setDisplayName("Andy McCall");
-        user.setUserStatus(UserStatus.ACTIVE);
-        user.setUserType(UserType.ADMINISTRATOR);
-
-        Post post = new Post();
-        post.setPostTitle("Very Berry Smoothie");
-        post.setPostContents("<p>The recipe for the smoothie I've been having most mornings is:</p>" +
-                "<ul>" +
-                "<li>Half a cup of blueberries</li>" +
-                "<li>Half a cup of raspberries</li>" +
-                "<li>Half a cup of strawberries</li>" +
-                "<li>Half a cup of curly kale</li>" +
-                "<li>Two desert spoons of plain yoghurt</li>" +
-                "<li>A cup of almond milk</li>" +
-                "</ul>" +
-                "<p>Blend in blender or smoothie maker for 60 seconds.  Chill before drinking.  Watch out for kale and strawberry seeds in-between your teeth after drinking!</p>");
-        post.setPostUser(user);
-        posts.add(post);
-
-        Post post2 = new Post();
-        post2.setPostTitle("Test Blog Post 2");
-        post2.setPostContents("This is the second blog post, within Twibble.");
-        post2.setPostUser(user);
-        posts.add(post2);
-
-        Post post3 = new Post();
-        post3.setPostTitle("Test Blog Post 3");
-        post3.setPostContents("This is the third blog post, within Twibble.");
-        post3.setPostUser(user);
-        posts.add(post3);
-
+    @Autowired
+    public void setPostService(PostService postService) {
+        this.postService = postService;
     }
+
 
     @RequestMapping(value = { "/", "index" }, method = RequestMethod.GET)
     public String homepage(Model model) {
+
+        List<Post> posts;
+
+        posts = postService.getRecentPosts(5);
 
         model.addAttribute("configuration", configuration);
         model.addAttribute("posts", posts);
@@ -130,7 +95,7 @@ public class TwibbleController {
         post.setPostContents(newPost.getPostContents());
         post.setPostUser(user);
 
-        posts.add(post);
+        postService.addPost(post);
 
         return "redirect:/index";
 
@@ -177,7 +142,7 @@ public class TwibbleController {
         configuration.setBlogBaseURL(newConfiguration.getBlogBaseURL());
         configuration.setNumberOfPostsToDisplay(newConfiguration.getNumberOfPostsToDisplay());
 
-        configurationService.addConfiguration(configuration);
+        configurationService.updateConfiguration(configuration);
 
         return "redirect:/admin/general";
 
