@@ -28,7 +28,6 @@ public class TwibbleController {
 
     ArrayList<Post> posts = new ArrayList();
 
-
     ConfigurationService configurationService;
     UserService userService;
     PostService postService;
@@ -36,6 +35,7 @@ public class TwibbleController {
     @Autowired
     public void setConfigurationService(ConfigurationService configurationService) {
         this.configurationService = configurationService;
+        configuration = configurationService.getConfiguration(1);
     }
 
 // TODO: Uncomment once UserService/DAO and PostService/DAO are implemented
@@ -50,9 +50,6 @@ public class TwibbleController {
 //    }
 
     public TwibbleController() {
-        configuration.setBlogTitle("Twibble");
-        configuration.setBlogTagLine("A blogging platform written in Java");
-        configuration.setBlogBaseURL("http://localhost:8080/index.html");
 
         user.setFirstName("Andy");
         user.setLastName("McCall");
@@ -177,6 +174,10 @@ public class TwibbleController {
 
         configuration.setBlogTitle(newConfiguration.getBlogTitle());
         configuration.setBlogTagLine(newConfiguration.getBlogTagLine());
+        configuration.setBlogBaseURL(newConfiguration.getBlogBaseURL());
+        configuration.setNumberOfPostsToDisplay(newConfiguration.getNumberOfPostsToDisplay());
+
+        configurationService.addConfiguration(configuration);
 
         return "redirect:/admin/general";
 

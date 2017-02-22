@@ -11,5 +11,6 @@ import co.twibble.model.Configuration;
  */
 public interface ConfigurationService {
     public void addConfiguration(Configuration configuration);
-    public Configuration getConfiguration();
+    public void updateConfiguration(Configuration configuration);
+    public Configuration getConfiguration(int blogId);
 }

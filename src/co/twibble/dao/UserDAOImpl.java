@@ -20,7 +20,6 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
     }
 
     public User getUserByUserName(String userName) {
-
         Criteria criteria = getSession().createCriteria(User.class);
         criteria.add(Restrictions.eq("userName",userName));
         return (User) criteria.uniqueResult();

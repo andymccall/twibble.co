@@ -11,4 +11,4 @@ CREATE TABLE `tw_user` (
   PRIMARY KEY (`userId`,`userName`),
   UNIQUE KEY `userId_UNIQUE` (`userId`),
   UNIQUE KEY `userName_UNIQUE` (`userName`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;

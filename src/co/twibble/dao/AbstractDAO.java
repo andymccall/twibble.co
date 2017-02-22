@@ -1,6 +1,7 @@
 package co.twibble.dao;
 
 import co.twibble.model.Configuration;
+import co.twibble.model.Post;
 import co.twibble.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -26,13 +27,19 @@ public abstract class AbstractDAO {
     public void persist(Configuration entity) {
         getSession().persist(entity);
     }
+    public void update(Configuration entity) { getSession().update(entity);}
+
     public void persist(User entity) {
         getSession().persist(entity);
     }
+    public void update(User entity) { getSession().update(entity);}
 
+    public void persist(Post entity) { getSession().persist(entity);}
+    public void update(Post entity) { getSession().update(entity);}
 
     public void delete(Object entity) {
         getSession().delete(entity);
     }
+    public void update(Object entity) { getSession().update(entity);}
 
 }

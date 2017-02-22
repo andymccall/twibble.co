@@ -15,7 +15,7 @@ import javax.persistence.*;
 //** TODO: Unit tests for Configuration class
 
 @Entity
-@Table(name = "configuration")
+@Table(name = "tw_configuration")
 public class Configuration {
 
     @Id
@@ -23,9 +23,16 @@ public class Configuration {
     @Column(name = "blogId")
     private int blogId;
 
+    @Column(name = "blogTitle")
     private String blogTitle;
+
+    @Column(name = "blogTagLine")
     private String blogTagLine;
+
+    @Column(name = "blogBaseURL")
     private String blogBaseURL;
+
+    @Column(name = "numberOfPostsToDisplay")
     private int numberOfPostsToDisplay;
 
     public String getBlogTitle() {

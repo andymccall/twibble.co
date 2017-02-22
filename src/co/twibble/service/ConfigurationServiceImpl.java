@@ -21,17 +21,19 @@ public class ConfigurationServiceImpl implements ConfigurationService {
     private ConfigurationDAO configurationDAO;
 
     public void setConfigurationDAO(ConfigurationDAO configurationDAO) {
-
         this.configurationDAO = configurationDAO;
     }
 
     public void addConfiguration(Configuration configuration) {
         configurationDAO.addConfiguation(configuration);
-
     }
 
-    public Configuration getConfiguration() {
-        return configurationDAO.getConfiguration();
+    public void updateConfiguration(Configuration configuration) {
+        configurationDAO.updateConfiguration(configuration);
+    }
+
+    public Configuration getConfiguration(int blogId) {
+        return configurationDAO.getConfiguration(blogId);
     }
 
 }
