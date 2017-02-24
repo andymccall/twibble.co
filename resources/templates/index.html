@@ -94,7 +94,7 @@
                             <h2 class="post-title" th:text="${post.postTitle}"/>
                             <h3 class="post-subtitle" th:utext="${post.postContents}"/>
                         </a>
-                        <p class="post-meta">Posted by <a th:href="${post.postUser.userName}" th:text="${post.postUser.userName}"></a> on September 18, 2014</p>
+                        <p class="post-meta">Posted by <a th:href="${post.postUser.userName}" th:text="${post.postUser.userName}"></a> on <span th:text="${#dates.format(post.postDate, 'dd-MMM-yyyy')}" th:remove="tag"></span> at <span th:text="${#dates.format(post.postDate, 'HH:mm')}" th:remove="tag"></span></p>
                     </div>
                     <hr></hr>
                 </div>

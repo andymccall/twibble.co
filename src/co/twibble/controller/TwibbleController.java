@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -80,6 +82,7 @@ public class TwibbleController {
         Post post = new Post();
         post.setPostTitle("Enter the title here...");
         post.setPostContents("Enter the contents here...");
+        post.setPostDate(new Date());
 
         model.addAttribute("configuration", configuration);
         model.addAttribute("post", post);
@@ -93,6 +96,7 @@ public class TwibbleController {
         Post post = new Post();
         post.setPostTitle(newPost.getPostTitle());
         post.setPostContents(newPost.getPostContents());
+        post.setPostDate(newPost.getPostDate());
         post.setPostUser(user);
 
         postService.addPost(post);

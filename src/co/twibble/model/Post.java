@@ -1,5 +1,7 @@
 package co.twibble.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -30,6 +32,7 @@ public class Post {
     private String postContents;
 
     @Column(name = "postDate")
+    @DateTimeFormat(pattern="dd-MMM-YYYY HH:MM")
     private Date postDate;
 
     @ManyToOne

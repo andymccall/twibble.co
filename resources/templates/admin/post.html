@@ -13,6 +13,7 @@
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/includes/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/includes/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css"/>
 
     <!-- Theme CSS -->
     <link rel="stylesheet" href="/includes/clean-blog/css/clean-blog.css"/>
@@ -23,6 +24,9 @@
           type='text/css'/>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
           rel='stylesheet' type='text/css'/>
+
+    <!-- jQuery -->
+    <script src="/includes/jquery/jquery-3.1.1.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -35,7 +39,7 @@
     <script>
         tinymce.init({
             content_css: '/includes/clean-blog/css/clean-blog.css',
-            selector: '#postEditor',
+            selector: '#postContents',
             toolbar: 'undo redo styleselect bold italic alignleft aligncenter alignright bullist numlist outdent indent code lists advlist',
             plugins: 'code lists advlist',
             height : 300
@@ -95,14 +99,30 @@
                 <div class="form-group row">
                     <label for="postTitle" class="col-2 col-form-label">Post Title</label>
                     <div class="col-10">
-                        <input class="form-control" type="text" th:value="${post.postTitle}" th:field="*{postTitle}" userId="postTitle"/>
+                        <input class="form-control" type="text" th:value="${post.postTitle}" th:field="*{postTitle}" id="postTitle"/>
                     </div>
                 </div>
 
                 <div class="form-group row">
+                    <label for="postDate" class="col-2 col-form-label">Post Date</label>
+                    <div class='input-group date' id='postDate'>
+                        <input type='text' class="form-control" data-date-format="DD-MMM-YYYY HH:mm" th:value="${post.postDate}" th:field="*{postDate}" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                            $(function () {
+                                $('#postDate').datetimepicker({
+                                });
+                            });
+                </script>
+
+                <div class="form-group row">
                     <label for="postContents" class="col-2 col-form-label">Post Content</label>
                     <div class="col-10">
-                        <textarea id="postEditor" th:value="${post.postContents}" th:field="*{postContents}" userId="postContents"/>
+                        <textarea th:value="${post.postContents}" th:field="*{postContents}" id="postContents"/>
                     </div>
                 </div>
 
@@ -116,11 +136,11 @@
         </div>
     </div>
 </div>
-<!-- jQuery -->
-<script src="/includes/jquery/jquery-3.1.1.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
 <script src="/includes/bootstrap/js/bootstrap.js"></script>
+<script src="/includes/moment/moment.js"></script>
+<script src="/includes/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
 
 <!-- Contact Form JavaScript -->
 <script src="/includes/clean-blog/js/jqBootstrapValidation.js"></script>

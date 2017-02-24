@@ -2,6 +2,7 @@ package co.twibble.dao;
 
 import co.twibble.model.Post;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -33,6 +34,7 @@ public class PostDAOImpl extends AbstractDAO implements PostDAO {
 
     public List<Post> getRecentPosts(int numberOfPosts) {
         Criteria criteria = getSession().createCriteria(Post.class);
+        criteria.addOrder(Order.desc("postDate"));
         criteria.setMaxResults(numberOfPosts);
         return (List<Post>) criteria.list();
     }
