@@ -2,6 +2,7 @@ package co.twibble.service;
 
 import co.twibble.model.Post;
 
+import java.awt.print.Pageable;
 import java.util.List;
 
 /**
@@ -14,6 +15,7 @@ import java.util.List;
 public interface PostService {
     public void addPost(Post post);
     public void updatePost(Post post);
-    public Post getPostById(int postId);
-    public List<Post> getRecentPosts(int numberOfPosts);
+    public List<Post> getAllPosts();
+    public List<Post> getAllPosts(String userName);
+    public List<Post> getPostByPath(int year, int month, int day, String postName);
 }

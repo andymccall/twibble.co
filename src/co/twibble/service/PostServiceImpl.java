@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.awt.print.Pageable;
 import java.util.List;
 
 /**
@@ -32,15 +33,23 @@ public class PostServiceImpl implements PostService {
     public void addPost(Post post) {
         postDAO.addPost(post);
     }
+
     public void updatePost(Post post) {
         postDAO.updatePost(post);
 
     }
-    public Post getPostById(int postId) {
-        return postDAO.getPostById(postId);
+
+    public List<Post> getAllPosts() {
+        return postDAO.getAllPosts();
     }
-    public List<Post> getRecentPosts(int numberOfPosts) {
-        return postDAO.getRecentPosts(numberOfPosts);
+
+    public List<Post> getAllPosts(String userName) {
+        return postDAO.getAllPosts(userName);
     }
+
+    public List<Post> getPostByPath(int year, int month, int day, String postName) {
+        return postDAO.getPostByPath(year, month, day, postName);
+    }
+
 
 }

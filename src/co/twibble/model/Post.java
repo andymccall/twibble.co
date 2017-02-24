@@ -28,11 +28,14 @@ public class Post {
     @Column(name = "postTitle")
     private String postTitle;
 
+    @Column(name = "postName")
+    private String postName;
+
     @Column(name = "postContents")
     private String postContents;
 
     @Column(name = "postDate")
-    @DateTimeFormat(pattern="dd-MMM-YYYY HH:MM")
+    @DateTimeFormat(pattern="dd-MMM-yyyy HH:mm")
     private Date postDate;
 
     @ManyToOne
@@ -53,6 +56,20 @@ public class Post {
 
     public void setPostTitle(String postTitle) {
         this.postTitle = postTitle;
+
+        String fixedPostName = postTitle.replaceAll(" ", "-").toLowerCase();
+        fixedPostName = fixedPostName.replaceAll("[^\\w-]", "");
+
+        setPostName(fixedPostName);
+
+    }
+
+    public String getPostName() {
+        return postName;
+    }
+
+    public void setPostName(String postName) {
+        this.postName = postName;
     }
 
     public String getPostContents() {
@@ -83,6 +100,7 @@ public class Post {
     public String toString() {
         return "Post{" +
                 "postTitle='" + postTitle + '\'' +
+                ", postName='" + postName + '\'' +
                 ", postContents='" + postContents + '\'' +
                 ", postDate=" + postDate +
                 ", postUser=" + postUser +

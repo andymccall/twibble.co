@@ -9,7 +9,7 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
 
-    <title>Twibble - A blogging platform written in Java</title>
+    <title th:text="${configuration.blogTitle} + ' - ' + ${configuration.blogTagLine}"></title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/includes/bootstrap/css/bootstrap.css"/>
@@ -55,9 +55,6 @@
                         <a href="about.html">About</a>
                     </li>
                     <li>
-                        <a href="post.html">Sample Post</a>
-                    </li>
-                    <li>
                         <a href="contact.html">Contact</a>
                     </li>
                 </ul>
@@ -90,11 +87,11 @@
 
                 <div th:each="post : ${posts}">
                     <div class="post-preview">
-                        <a href="post.html">
+                        <a th:href="'/post/' + ${#dates.format(post.postDate,'yyyy/MM/dd')} + '/' + ${post.postName}">
                             <h2 class="post-title" th:text="${post.postTitle}"/>
                             <h3 class="post-subtitle" th:utext="${post.postContents}"/>
                         </a>
-                        <p class="post-meta">Posted by <a th:href="${post.postUser.userName}" th:text="${post.postUser.userName}"></a> on <span th:text="${#dates.format(post.postDate, 'dd-MMM-yyyy')}" th:remove="tag"></span> at <span th:text="${#dates.format(post.postDate, 'HH:mm')}" th:remove="tag"></span></p>
+                        <p class="post-meta">Posted by <a th:href="'/post/' + ${post.postUser.userName}" th:text="${post.postUser.userName}"></a> on <span th:text="${#dates.format(post.postDate, 'dd-MMM-yyyy')}" th:remove="tag"></span> at <span th:text="${#dates.format(post.postDate, 'HH:mm')}" th:remove="tag"></span></p>
                     </div>
                     <hr></hr>
                 </div>

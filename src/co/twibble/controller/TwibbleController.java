@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -15,6 +16,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import static java.lang.String.format;
 
 /**
  * The TwibbleController class is the controller for the home page
@@ -36,7 +39,6 @@ public class TwibbleController {
     @Autowired
     public void setConfigurationService(ConfigurationService configurationService) {
         this.configurationService = configurationService;
-        configuration = configurationService.getConfiguration(1);
     }
 
     @Autowired
@@ -53,12 +55,44 @@ public class TwibbleController {
 
     @RequestMapping(value = { "/", "index" }, method = RequestMethod.GET)
     public String homepage(Model model) {
+        configuration = configurationService.getConfiguration(1);
+        model.addAttribute("configuration", configuration);
 
         List<Post> posts;
 
-        posts = postService.getRecentPosts(5);
+        posts = postService.getAllPosts();
 
+        model.addAttribute("posts", posts);
+
+        return "index";
+    }
+
+    @RequestMapping(value = { "post/{year}/{month}/{day}/{postName}" }, method = RequestMethod.GET)
+    public String single(@PathVariable Integer year,
+                         @PathVariable Integer month,
+                         @PathVariable Integer day,
+                         @PathVariable String postName, Model model) {
+        configuration = configurationService.getConfiguration(1);
         model.addAttribute("configuration", configuration);
+
+        List<Post> posts;
+
+        posts = postService.getPostByPath(year, month, day, postName);
+
+        model.addAttribute("post", posts.get(0));
+
+        return "post";
+    }
+
+    @RequestMapping(value = { "post/{username}" }, method = RequestMethod.GET)
+    public String single(@PathVariable String username, Model model) {
+        configuration = configurationService.getConfiguration(1);
+        model.addAttribute("configuration", configuration);
+
+        List<Post> posts;
+
+        posts = postService.getAllPosts(username);
+
         model.addAttribute("posts", posts);
 
         return "index";
@@ -78,13 +112,14 @@ public class TwibbleController {
 
     @RequestMapping(value = { "admin/post" }, method = RequestMethod.GET)
     public String adminPost(Model model) {
+        configuration = configurationService.getConfiguration(1);
+        model.addAttribute("configuration", configuration);
 
         Post post = new Post();
         post.setPostTitle("Enter the title here...");
         post.setPostContents("Enter the contents here...");
         post.setPostDate(new Date());
 
-        model.addAttribute("configuration", configuration);
         model.addAttribute("post", post);
 
         return "admin/post";
@@ -101,16 +136,17 @@ public class TwibbleController {
 
         postService.addPost(post);
 
-        return "redirect:/index";
+        return "redirect:" + configuration.getBlogBaseURL();
 
     }
 
     @RequestMapping(value = { "admin/user" }, method = RequestMethod.GET)
     public String adminUser(Model model) {
+        configuration = configurationService.getConfiguration(1);
+        model.addAttribute("configuration", configuration);
 
         User newUser = new User();
         model.addAttribute("user", newUser);
-        model.addAttribute("configuration", configuration);
 
         return "admin/user";
     }
@@ -132,7 +168,7 @@ public class TwibbleController {
 
     @RequestMapping(value = { "admin/general" }, method = RequestMethod.GET)
     public String adminGeneral(Model model) {
-
+        configuration = configurationService.getConfiguration(1);
         model.addAttribute("configuration", configuration);
 
         return "admin/general";
