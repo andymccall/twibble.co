@@ -2,7 +2,6 @@ package co.twibble.dao;
 
 import co.twibble.model.Post;
 
-import java.awt.print.Pageable;
 import java.util.List;
 
 /**

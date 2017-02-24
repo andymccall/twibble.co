@@ -1,9 +1,8 @@
 package co.twibble.dao;
 
 import co.twibble.model.Post;
-import co.twibble.model.User;
 import org.hibernate.Criteria;
-import org.hibernate.criterion.Order;
+import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -30,17 +29,18 @@ public class PostDAOImpl extends AbstractDAO implements PostDAO {
     }
 
     public List<Post> getAllPosts() {
-        Criteria criteria = getSession().createCriteria(Post.class);
-        criteria.addOrder(Order.desc("postDate"));
-        return(List<Post>) criteria.list();
+
+        Query query = getSession().createQuery("from Post order by postDate desc");
+
+        return(List<Post>) query.list();
     }
 
     public List<Post> getAllPosts(String userName) {
-        Criteria criteria = getSession().createCriteria(Post.class);
-        criteria.add(Restrictions.eq("userName",userName));
-//        criteria.add(Restrictions.eq("userName",userName));
-        criteria.addOrder(Order.desc("postDate"));
-        return(List<Post>) criteria.list();
+
+        Query query = getSession().createQuery("select p from Post as p join p.postUser as pu where pu.userName = :userName order by p.postDate desc ");
+        query.setString("userName", userName);
+
+        return(List<Post>) query.list();
     }
 
     public List<Post> getPostByPath(int year, int month, int day, String postName) {
