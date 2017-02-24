@@ -1,9 +1,11 @@
 CREATE TABLE `tw_post` (
   `postId` int(11) NOT NULL AUTO_INCREMENT,
   `postTitle` text,
+  `postName` text,
   `postContents` text,
   `postDate` datetime DEFAULT NULL,
   `userId` int(11) NOT NULL,
+  `column_7` int(11) DEFAULT NULL,
   PRIMARY KEY (`postId`),
   UNIQUE KEY `postId_UNIQUE` (`postId`,`userId`),
   KEY `userId_idx` (`userId`),
