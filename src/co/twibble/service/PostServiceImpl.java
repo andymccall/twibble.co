@@ -43,8 +43,8 @@ public class PostServiceImpl implements PostService {
         return postDAO.getAllPosts();
     }
 
-    public List<Post> getAllPosts(String userName) {
-        return postDAO.getAllPosts(userName);
+    public List<Post> getPostByUsername(String userName) {
+        return postDAO.getPostByUsername(userName);
     }
 
     public List<Post> getPostByPath(int year, int month, int day, String postName) {
@@ -63,4 +63,8 @@ public class PostServiceImpl implements PostService {
         return postDAO.getPostByYearMonthDay(year, month, day);
     }
 
+    public List<Post> getPostByPage(int pageNumber, int numberOfPosts) {
+        return postDAO.getPostByPage(pageNumber, numberOfPosts);
+
+    }
 }

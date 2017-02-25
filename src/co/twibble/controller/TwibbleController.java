@@ -12,18 +12,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import static java.lang.String.format;
 
 /**
  * The TwibbleController class is the controller for the home page
  *
  * @author  Andy McCall
- * @version 0.3
+ * @version 0.4
  * @since   2017-02-16
  */
 @Controller
@@ -60,8 +56,9 @@ public class TwibbleController {
 
         List<Post> posts;
 
-        posts = postService.getAllPosts();
+        posts = postService.getPostByPage(1, configuration.getNumberOfPostsToDisplay());
 
+        model.addAttribute("nextpage", 2);
         model.addAttribute("posts", posts);
 
         return "index";
@@ -98,8 +95,23 @@ public class TwibbleController {
         return "index";
     }
 
+    @RequestMapping(value = { "post/page/{page}" }, method = RequestMethod.GET)
+    public String pagePost(@PathVariable Integer page, Model model) {
+        configuration = configurationService.getConfiguration(1);
+        model.addAttribute("configuration", configuration);
+
+        List<Post> posts;
+
+        posts = postService.getPostByPage(page, configuration.getNumberOfPostsToDisplay());
+
+        model.addAttribute("nextpage", page+1);
+        model.addAttribute("posts", posts);
+
+        return "index";
+    }
+
     @RequestMapping(value = { "post/{year}/{month}" }, method = RequestMethod.GET)
-    public String yearPost(@PathVariable Integer year,
+    public String yearAndMonthPost(@PathVariable Integer year,
                            @PathVariable Integer month,
                            Model model) {
         configuration = configurationService.getConfiguration(1);
@@ -115,7 +127,7 @@ public class TwibbleController {
     }
 
     @RequestMapping(value = { "post/{year}/{month}/{day}" }, method = RequestMethod.GET)
-    public String yearPost(@PathVariable Integer year,
+    public String yearAndMonthAndDayPost(@PathVariable Integer year,
                            @PathVariable Integer month,
                            @PathVariable Integer day,
                            Model model) {
@@ -138,7 +150,7 @@ public class TwibbleController {
 
         List<Post> posts;
 
-        posts = postService.getAllPosts(username);
+        posts = postService.getPostByUsername(username);
 
         model.addAttribute("posts", posts);
 

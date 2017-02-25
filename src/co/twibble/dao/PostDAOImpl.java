@@ -35,7 +35,7 @@ public class PostDAOImpl extends AbstractDAO implements PostDAO {
         return(List<Post>) query.list();
     }
 
-    public List<Post> getAllPosts(String userName) {
+    public List<Post> getPostByUsername(String userName) {
 
         Query query = getSession().createQuery("select p from Post as p join p.postUser as pu where pu.userName = :userName order by p.postDate desc ");
         query.setString("userName", userName);
@@ -97,5 +97,24 @@ public class PostDAOImpl extends AbstractDAO implements PostDAO {
         return (List<Post>) query.list();
 
     }
+
+    public List<Post> getPostByPage(int pageNumber, int numberOfPosts) {
+
+        int firstResult;
+
+        if (pageNumber <= 1) {
+            firstResult = 0;
+        } else {
+            firstResult = (numberOfPosts * pageNumber) - numberOfPosts;
+        }
+
+        Query query = getSession().createQuery("from Post order by postDate desc")
+                .setFirstResult(firstResult)
+                .setMaxResults(numberOfPosts);
+
+        return (List<Post>) query.list();
+
+    }
+
 
 }
