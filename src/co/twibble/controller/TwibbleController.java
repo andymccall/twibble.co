@@ -68,7 +68,7 @@ public class TwibbleController {
     }
 
     @RequestMapping(value = { "post/{year}/{month}/{day}/{postName}" }, method = RequestMethod.GET)
-    public String single(@PathVariable Integer year,
+    public String singlePost(@PathVariable Integer year,
                          @PathVariable Integer month,
                          @PathVariable Integer day,
                          @PathVariable String postName, Model model) {
@@ -84,7 +84,54 @@ public class TwibbleController {
         return "post";
     }
 
-    @RequestMapping(value = { "post/{username}" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "post/{year}" }, method = RequestMethod.GET)
+    public String yearPost(@PathVariable Integer year, Model model) {
+        configuration = configurationService.getConfiguration(1);
+        model.addAttribute("configuration", configuration);
+
+        List<Post> posts;
+
+        posts = postService.getPostByYear(year);
+
+        model.addAttribute("posts", posts);
+
+        return "index";
+    }
+
+    @RequestMapping(value = { "post/{year}/{month}" }, method = RequestMethod.GET)
+    public String yearPost(@PathVariable Integer year,
+                           @PathVariable Integer month,
+                           Model model) {
+        configuration = configurationService.getConfiguration(1);
+        model.addAttribute("configuration", configuration);
+
+        List<Post> posts;
+
+        posts = postService.getPostByYearMonth(year, month);
+
+        model.addAttribute("posts", posts);
+
+        return "index";
+    }
+
+    @RequestMapping(value = { "post/{year}/{month}/{day}" }, method = RequestMethod.GET)
+    public String yearPost(@PathVariable Integer year,
+                           @PathVariable Integer month,
+                           @PathVariable Integer day,
+                           Model model) {
+        configuration = configurationService.getConfiguration(1);
+        model.addAttribute("configuration", configuration);
+
+        List<Post> posts;
+
+        posts = postService.getPostByYearMonthDay(year, month, day);
+
+        model.addAttribute("posts", posts);
+
+        return "index";
+    }
+
+    @RequestMapping(value = { "post/user/{username}" }, method = RequestMethod.GET)
     public String single(@PathVariable String username, Model model) {
         configuration = configurationService.getConfiguration(1);
         model.addAttribute("configuration", configuration);

@@ -68,6 +68,34 @@ public class PostDAOImpl extends AbstractDAO implements PostDAO {
 
     }
 
+    public List<Post> getPostByYear(int year) {
 
+        Query query = getSession().createQuery("FROM Post WHERE year(postDate) = :year")
+                .setParameter("year", year);
+
+        return (List<Post>) query.list();
+
+    }
+
+    public List<Post> getPostByYearMonth(int year, int month) {
+
+        Query query = getSession().createQuery("FROM Post WHERE year(postDate) = :year AND month(postDate) = :month")
+                .setParameter("year", year)
+                .setParameter("month", month);
+
+        return (List<Post>) query.list();
+
+    }
+
+    public List<Post> getPostByYearMonthDay(int year, int month, int day) {
+
+        Query query = getSession().createQuery("FROM Post WHERE year(postDate) = :year AND month(postDate) = :month AND day(postDate) = :day")
+                .setParameter("year", year)
+                .setParameter("month", month)
+                .setParameter("day", day);
+
+        return (List<Post>) query.list();
+
+    }
 
 }

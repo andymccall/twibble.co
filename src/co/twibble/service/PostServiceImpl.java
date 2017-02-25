@@ -51,5 +51,16 @@ public class PostServiceImpl implements PostService {
         return postDAO.getPostByPath(year, month, day, postName);
     }
 
+    public List<Post> getPostByYear(int year) {
+        return postDAO.getPostByYear(year);
+    }
+
+    public List<Post> getPostByYearMonth(int year, int month) {
+        return postDAO.getPostByYearMonth(year, month);
+    }
+
+    public List<Post> getPostByYearMonthDay(int year, int month, int day) {
+        return postDAO.getPostByYearMonthDay(year, month, day);
+    }
 
 }

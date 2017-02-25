@@ -17,4 +17,7 @@ public interface PostDAO {
     public List<Post> getAllPosts();
     public List<Post> getAllPosts(String userName);
     public List<Post> getPostByPath(int year, int month, int day, String postName);
+    public List<Post> getPostByYear(int year);
+    public List<Post> getPostByYearMonth(int year, int month);
+    public List<Post> getPostByYearMonthDay(int year, int month, int day);
 }

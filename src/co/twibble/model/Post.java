@@ -34,7 +34,7 @@ public class Post {
     @Column(name = "postContents")
     private String postContents;
 
-    @Column(name = "postDate")
+    @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern="dd-MMM-yyyy HH:mm")
     private Date postDate;
 
