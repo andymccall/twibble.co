@@ -78,7 +78,7 @@ public class TwibbleController {
 
         model.addAttribute("post", posts.get(0));
 
-        return "post";
+        return "index";
     }
 
     @RequestMapping(value = { "post/{year}" }, method = RequestMethod.GET)
@@ -143,7 +143,7 @@ public class TwibbleController {
         return "index";
     }
 
-    @RequestMapping(value = { "post/user/{username}" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "user/{username}" }, method = RequestMethod.GET)
     public String single(@PathVariable String username, Model model) {
         configuration = configurationService.getConfiguration(1);
         model.addAttribute("configuration", configuration);
@@ -155,6 +155,14 @@ public class TwibbleController {
         model.addAttribute("posts", posts);
 
         return "index";
+    }
+
+    @RequestMapping(value = { "login" }, method = RequestMethod.GET)
+    public String login(Model model) {
+        configuration = configurationService.getConfiguration(1);
+        model.addAttribute("configuration", configuration);
+
+        return "login";
     }
 
     @RequestMapping(value = { "about" }, method = RequestMethod.GET)
