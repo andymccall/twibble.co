@@ -44,27 +44,16 @@ public class PostDAOImpl extends AbstractDAO implements PostDAO {
     }
 
     public List<Post> getPostByPath(int year, int month, int day, String postName) {
-        Criteria criteria = getSession().createCriteria(Post.class);
 
-        Date startDate = new Date();
-        Date endDate;
 
-        try {
-            startDate = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(year + "-" + month + "-" + day);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        Query query = getSession().createQuery("FROM Post WHERE year(postDate) = :year AND month(postDate) = :month AND day(postDate) = :day AND (postName) = :postName")
+                .setParameter("year", year)
+                .setParameter("month", month)
+                .setParameter("day", day)
+                .setParameter("postName", postName)
+                .setMaxResults(1);
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(startDate);
-        calendar.add(Calendar.DATE, 1);
-        endDate = calendar.getTime();
-
-        criteria.add(Restrictions.between("postDate", startDate, endDate));
-        criteria.add(Restrictions.eq("postName",postName));
-        criteria.setMaxResults(1);
-
-        return (List<Post>) criteria.list();
+        return (List<Post>) query.list();
 
     }
 
