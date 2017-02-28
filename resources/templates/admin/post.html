@@ -3,37 +3,7 @@
 
 <head>
 
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content=""/>
-    <meta name="author" content=""/>
-
-    <title>Twibble - A blogging platform written in Java</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/includes/bootstrap/css/bootstrap.css"/>
-    <link rel="stylesheet" href="/includes/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css"/>
-
-    <!-- Theme CSS -->
-    <link rel="stylesheet" href="/includes/clean-blog/css/clean-blog.css"/>
-
-    <!-- Custom Fonts -->
-    <link rel="stylesheet" href="/includes/font-awesome/css/font-awesome.css"/>
-    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
-          type='text/css'/>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
-          rel='stylesheet' type='text/css'/>
-
-    <!-- jQuery -->
-    <script src="/includes/jquery/jquery-3.1.1.js"></script>
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <div th:include="fragments/head :: head"></div>
 
     <script src='/includes/tinymce/tinymce.min.js'></script>
     <script>
@@ -45,6 +15,7 @@
             height : 300
         });
     </script>
+
 </head>
 
 <body>
@@ -113,17 +84,15 @@
     </div>
 </div>
 
-<!-- Bootstrap Core JavaScript -->
-<script src="/includes/bootstrap/js/bootstrap.js"></script>
-<script src="/includes/moment/moment.js"></script>
-<script src="/includes/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<!-- Footer -->
+<footer>
 
-<!-- Contact Form JavaScript -->
-<script src="/includes/clean-blog/js/jqBootstrapValidation.js"></script>
-<script src="/includes/clean-blog/js/contact_me.js"></script>
+    <div th:include="fragments/footer :: footer"></div>
 
-<!-- Theme JavaScript -->
-<script src="/includes/clean-blog/js/clean-blog.js"></script>
+    <script src="/includes/moment/moment.js"></script>
+    <script src="/includes/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+
+</footer>
 
 </body>
 </html>
