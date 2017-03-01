@@ -1,13 +1,10 @@
 package co.twibble.dao;
 
 import co.twibble.model.Post;
-import org.hibernate.Criteria;
+import co.twibble.model.PostStatus;
 import org.hibernate.Query;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -89,6 +86,12 @@ public class PostDAOImpl extends AbstractDAO implements PostDAO {
 
     public List<Post> getPostByPage(int pageNumber, int numberOfPosts) {
 
+        return getPostByPage(pageNumber, numberOfPosts, PostStatus.PUBLISHED);
+
+    }
+
+    public List<Post> getPostByPage(int pageNumber, int numberOfPosts, PostStatus postStatus) {
+
         int firstResult;
 
         if (pageNumber <= 1) {
@@ -97,7 +100,8 @@ public class PostDAOImpl extends AbstractDAO implements PostDAO {
             firstResult = (numberOfPosts * pageNumber) - numberOfPosts;
         }
 
-        Query query = getSession().createQuery("from Post order by postDate desc")
+        Query query = getSession().createQuery("from Post where postStatus = :postStatus order by postDate desc")
+                .setParameter("postStatus", postStatus)
                 .setFirstResult(firstResult)
                 .setMaxResults(numberOfPosts);
 

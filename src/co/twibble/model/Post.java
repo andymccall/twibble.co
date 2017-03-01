@@ -42,6 +42,10 @@ public class Post {
     @JoinColumn(name="userId")
     private User postUser;
 
+    @Column(name = "postStatus")
+    @Enumerated(EnumType.STRING)
+    private PostStatus postStatus;
+
     public int getPostId() {
         return postId;
     }
@@ -96,14 +100,23 @@ public class Post {
         this.postUser = postUser;
     }
 
+    public PostStatus getPostStatus() {
+        return postStatus;
+    }
+
+    public void setPostStatus(PostStatus postStatus) {
+        this.postStatus = postStatus;
+    }
+
     @Override
     public String toString() {
         return "Post{" +
                 "postTitle='" + postTitle + '\'' +
                 ", postName='" + postName + '\'' +
                 ", postContents='" + postContents + '\'' +
-                ", postDate=" + postDate +
-                ", postUser=" + postUser +
+                ", postDate=" + postDate + '\'' +
+                ", postUser=" + postUser + '\'' +
+                ", postStatus=" + postStatus +
                 '}';
     }
 }
