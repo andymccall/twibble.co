@@ -207,6 +207,23 @@ public class TwibbleController {
         return "admin/post";
     }
 
+    @RequestMapping(value = { "admin/post/{year}/{month}/{day}/{postName}" }, method = RequestMethod.GET)
+    public String adminEditPost(@PathVariable Integer year,
+                             @PathVariable Integer month,
+                             @PathVariable Integer day,
+                             @PathVariable String postName, Model model) {
+        configuration = configurationService.getConfiguration(1);
+        model.addAttribute("configuration", configuration);
+
+        List<Post> posts;
+
+        posts = postService.getPostByPath(year, month, day, postName);
+
+        model.addAttribute("post", posts.get(0));
+
+        return "admin/post";
+    }
+
     @RequestMapping(value = "admin/post", method = RequestMethod.POST)
     public String saveAdminPost(@ModelAttribute("Post") Post newPost) {
 

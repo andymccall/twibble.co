@@ -6,7 +6,7 @@
 
 # About
 
-Java based Blogging Platform using Spring, Hibernate and MySQL
+Java based Blogging Platform using Spring, Hibernate and MySQL.
 
 Twibble is a work in progress blogging platform, written in Java using Spring, Hibernate and MySQL.
 
