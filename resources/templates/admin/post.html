@@ -16,6 +16,9 @@
         });
     </script>
 
+    <script src="/includes/moment/moment.js"></script>
+    <script src="/includes/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+
 </head>
 
 <body>
@@ -67,6 +70,15 @@
                 </script>
 
                 <div class="form-group row">
+                    <label for="postStatus" class="col-2 col-form-label">Post Status</label>
+                    <select class="form-control" id="postStatus" name="postStatus" th:field="*{postStatus}">
+                        <option th:each="postStatus : ${T(co.twibble.model.PostStatus).values()}"
+                                th:value="${postStatus}"
+                                th:text="${postStatus.displayName}"></option>
+                    </select>
+                </div>
+
+                <div class="form-group row">
                     <label for="postContents" class="col-2 col-form-label">Post Content</label>
                     <div class="col-10">
                         <textarea th:value="${post.postContents}" th:field="*{postContents}" id="postContents"/>
@@ -88,9 +100,6 @@
 <footer>
 
     <div th:include="fragments/footer :: footer"></div>
-
-    <script src="/includes/moment/moment.js"></script>
-    <script src="/includes/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
 
 </footer>
 

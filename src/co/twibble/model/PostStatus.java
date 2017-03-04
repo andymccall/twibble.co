@@ -6,12 +6,23 @@ package co.twibble.model;
  * a draft, published
  *
  * @author  Andy McCall
- * @version 0.1
+ * @version 0.2
  * @since   2017-03-01
  */
 public enum PostStatus {
-    PUBLISHED,
-    NOT_PUBLISHED,
-    DRAFT,
-    DELETED
+    PUBLISHED("Published"),
+    NOT_PUBLISHED("Not Published"),
+    DRAFT("Draft"),
+    DELETED("Deleted");
+
+    private final String displayName;
+
+    PostStatus(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
 }

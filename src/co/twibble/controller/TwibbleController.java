@@ -231,6 +231,7 @@ public class TwibbleController {
         post.setPostTitle(newPost.getPostTitle());
         post.setPostContents(newPost.getPostContents());
         post.setPostDate(newPost.getPostDate());
+        post.setPostStatus(newPost.getPostStatus());
         post.setPostUser(user);
 
         postService.addPost(post);
