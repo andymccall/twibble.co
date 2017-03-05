@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <div th:include="fragments/head :: head"></div>
+
+    <script src='/includes/tinymce/tinymce.min.js'></script>
+    <script>
+        tinymce.init({
+            content_css: '/includes/clean-blog/css/clean-blog.css',
+            selector: '#postContents',
+            toolbar: 'undo redo styleselect bold italic alignleft aligncenter alignright bullist numlist outdent indent code lists advlist',
+            plugins: 'code lists advlist',
+            height : 300
+        });
+    </script>
+
+    <script src="/includes/moment/moment.js"></script>
+    <script src="/includes/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+
+</head>
+
+<body>
+
+<div th:include="fragments/navigation :: navigation"></div>
+
+<!-- Page Header -->
+<!-- Set your background image for this header on the line below. -->
+<header class="intro-header" style="background-image: url('/includes/clean-blog/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="site-heading">
+                    <h1 th:text="${configuration.blogTitle}"></h1>
+                    <hr class="small"></hr>
+                    <span class="subheading" th:text="${configuration.blogTagLine}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Categories</th>
+                    <th>Tags</th>
+                    <th>Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="post : ${posts}">
+                    <td th:text="${post.postTitle}"></td>
+                    <td th:text="${post.postUser.userName}"></td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td th:text="${#dates.format(post.postDate, 'dd:MM:yyyy HH:mm')}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<!-- Footer -->
+<footer>
+
+    <div th:include="fragments/footer :: footer"></div>
+
+</footer>
+
+</body>
+</html>

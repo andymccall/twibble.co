@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <div th:include="fragments/head :: head"></div>
+
+</head>
+
+<body>
+
+<div th:include="fragments/navigation :: navigation"></div>
+
+<!-- Page Header -->
+<!-- Set your background image for this header on the line below. -->
+<header class="intro-header" style="background-image: url('/includes/clean-blog/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="site-heading">
+                    <h1 th:text="${configuration.blogTitle}"></h1>
+                    <hr class="small"></hr>
+                    <span class="subheading" th:text="${configuration.blogTagLine}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <form th:object="${user}" th:action="@{/admin/edituser}" method="POST">
+                <div class="form-group row">
+                    <label for="firstName" class="col-2 col-form-label">First Name</label>
+                    <div class="col-10">
+                        <input class="form-control" type="text" th:value="${user.firstName}" th:field="*{firstName}" userId="firstName"/>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="lastName" class="col-2 col-form-label">Last Name</label>
+                    <div class="col-10">
+                        <input class="form-control" type="text" th:value="${user.lastName}" th:field="*{lastName}" userId="lastName"/>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="userName" class="col-2 col-form-label">Username</label>
+                    <div class="col-10">
+                        <input class="form-control" type="text" th:value="${user.userName}" th:field="*{userName}" userId="userName"/>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="displayName" class="col-2 col-form-label">Display Name</label>
+                    <div class="col-10">
+                        <input class="form-control" type="text" th:value="${user.displayName}" th:field="*{displayName}" userId="displayName"/>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="emailAddress" class="col-2 col-form-label">Email Address</label>
+                    <div class="col-10">
+                        <input class="form-control" type="email" th:value="${user.emailAddress}" th:field="*{emailAddress}" userId="emailAddress"/>
+                    </div>
+                </div>
+
+                <!-- Pager -->
+                <ul class="pager">
+                    <li class="next">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+
+    <div th:include="fragments/footer :: footer"></div>
+
+</footer>
+
+</body>
+</html>
