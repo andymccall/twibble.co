@@ -17,6 +17,8 @@ public interface PostService {
 
     public void updatePost(Post post);
 
+    public Post getPostById(int postId);
+
     public List<Post> getAllPosts();
 
     public List<Post> getPostByUsername(String userName);

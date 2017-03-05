@@ -25,6 +25,16 @@ public class PostDAOImpl extends AbstractDAO implements PostDAO {
         update(post);
     }
 
+    public Post getPostById(int postId) {
+
+        Query query = getSession().createQuery("FROM Post WHERE postId = :postId")
+                .setParameter("postId", postId)
+                .setMaxResults(1);
+
+        return (Post) query.uniqueResult();
+
+    }
+
     public List<Post> getAllPosts() {
 
         Query query = getSession().createQuery("from Post order by postDate desc");

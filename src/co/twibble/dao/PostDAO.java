@@ -14,6 +14,7 @@ import java.util.List;
 public interface PostDAO {
     public void addPost(Post post);
     public void updatePost(Post post);
+    public Post getPostById(int postId);
     public List<Post> getAllPosts();
     public List<Post> getPostByUsername(String userName);
     public List<Post> getPostByPath(int year, int month, int day, String postName);

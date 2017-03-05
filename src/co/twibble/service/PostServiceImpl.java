@@ -39,6 +39,10 @@ public class PostServiceImpl implements PostService {
 
     }
 
+    public Post getPostById(int postId) {
+        return postDAO.getPostById(postId);
+    }
+
     public List<Post> getAllPosts() {
         return postDAO.getAllPosts();
     }

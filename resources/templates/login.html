@@ -31,11 +31,9 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div th:if="${param.error}">
-                Invalid username and password.
+            <div th:if="${param.error}">Invalid username and password.
             </div>
-            <div th:if="${param.logout}">
-                You have been logged out.
+            <div th:if="${param.logout}">You have been logged out.
             </div>
             <form th:action="@{/login}" method="post">
                 <div class="form-group row">

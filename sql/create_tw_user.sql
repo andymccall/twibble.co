@@ -5,7 +5,7 @@ CREATE TABLE `tw_user` (
   `userName` varchar(45) NOT NULL,
   `displayName` varchar(16) DEFAULT NULL,
   `emailAddress` varchar(100) DEFAULT NULL,
-  `password` varchar(45) DEFAULT NULL,
+  `password` varchar(100) DEFAULT NULL,
   `userType` varchar(16) NOT NULL,
   `userStatus` varchar(16) NOT NULL,
   PRIMARY KEY (`userId`,`userName`),

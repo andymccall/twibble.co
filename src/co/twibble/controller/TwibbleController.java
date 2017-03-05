@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -217,7 +218,7 @@ public class TwibbleController {
 
         model.addAttribute("posts", posts);
 
-        return "admin/post";
+        return "admin/listpost";
     }
 
     @RequestMapping(value = { "admin/post/{year}/{month}/{day}/{postName}" }, method = RequestMethod.GET)
@@ -254,20 +255,28 @@ public class TwibbleController {
     }
 
     @RequestMapping(value = "admin/editpost", method = RequestMethod.POST)
-    public String saveAdminEditPost(@ModelAttribute("Post") Post newPost) {
+    public String saveAdminEditPost(@ModelAttribute("Post") Post editedPost,
+                                    final RedirectAttributes redirectAttributes) {
 
-        Post post = new Post();
-        post.setPostTitle(newPost.getPostTitle());
-        post.setPostContents(newPost.getPostContents());
-        post.setPostDate(newPost.getPostDate());
-        post.setPostStatus(newPost.getPostStatus());
-        post.setPostUser(user);
+        Post post = editedPost;
+        Post originalPost = postService.getPostById(post.getPostId());
+        String result;
 
-        User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.getUserByUserName(auth.getName());
 
-        postService.updatePost(post);
+        if ((originalPost.getPostUser().getUserName() == user.getUserName()) | (user.getUserType() == UserType.ADMINISTRATOR)) {
+            post.setPostUser(user);
+            postService.updatePost(post);
+            result = "redirect:" + configuration.getBlogBaseURL();
+            System.out.println("Did the update!!!");
+        } else {
+            redirectAttributes.addFlashAttribute("message", "Insufficient privileges to edit other users post!");
+            result = "redirect:/admin/message";
+            System.out.println("Didn't do the update!!!");
+        }
 
-        return "redirect:" + configuration.getBlogBaseURL();
+        return result;
 
     }
 
@@ -329,6 +338,14 @@ public class TwibbleController {
 
         return "redirect:/admin/general";
 
+    }
+
+    @RequestMapping(value = { "admin/message" }, method = RequestMethod.GET)
+    public String adminMessage(Model model) {
+        configuration = configurationService.getConfiguration(1);
+        model.addAttribute("configuration", configuration);
+
+        return "admin/message";
     }
 
 }

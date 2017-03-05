@@ -5,7 +5,7 @@ CREATE TABLE `tw_post` (
   `postContents` text,
   `postDate` datetime DEFAULT NULL,
   `userId` int(11) NOT NULL,
-  `column_7` int(11) DEFAULT NULL,
+  `postStatus` char(16) DEFAULT NULL,
   PRIMARY KEY (`postId`),
   UNIQUE KEY `postId_UNIQUE` (`postId`,`userId`),
   KEY `userId_idx` (`userId`),
