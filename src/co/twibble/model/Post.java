@@ -3,7 +3,9 @@ package co.twibble.model;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * The Post class is the class that holds blog posts

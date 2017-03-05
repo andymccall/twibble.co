@@ -45,7 +45,6 @@ public class TwibbleController {
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
-        user = userService.getUserByUserName("andymccall");
     }
 
     @Autowired
@@ -218,7 +217,7 @@ public class TwibbleController {
 
         model.addAttribute("posts", posts);
 
-        return "admin/listpost";
+        return "admin/post";
     }
 
     @RequestMapping(value = { "admin/post/{year}/{month}/{day}/{postName}" }, method = RequestMethod.GET)
@@ -249,6 +248,24 @@ public class TwibbleController {
         post.setPostUser(user);
 
         postService.addPost(post);
+
+        return "redirect:" + configuration.getBlogBaseURL();
+
+    }
+
+    @RequestMapping(value = "admin/editpost", method = RequestMethod.POST)
+    public String saveAdminEditPost(@ModelAttribute("Post") Post newPost) {
+
+        Post post = new Post();
+        post.setPostTitle(newPost.getPostTitle());
+        post.setPostContents(newPost.getPostContents());
+        post.setPostDate(newPost.getPostDate());
+        post.setPostStatus(newPost.getPostStatus());
+        post.setPostUser(user);
+
+        User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        postService.updatePost(post);
 
         return "redirect:" + configuration.getBlogBaseURL();
 
