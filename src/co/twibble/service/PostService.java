@@ -32,4 +32,6 @@ public interface PostService {
     public List<Post> getPostByYearMonthDay(int year, int month, int day);
 
     public List<Post> getPostByPage(int pageNumber, int numberOfPosts);
+
+    public int getNumberOfPosts();
 }

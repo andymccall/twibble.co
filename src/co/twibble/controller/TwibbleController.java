@@ -59,12 +59,13 @@ public class TwibbleController {
         configuration = configurationService.getConfiguration(1);
         model.addAttribute("configuration", configuration);
 
-        List<Post> posts;
+        Pager<Post> pager = new Pager<>(postService.getAllPosts(),configuration.getNumberOfPostsToDisplay());
 
-        posts = postService.getPostByPage(1, configuration.getNumberOfPostsToDisplay());
-
-        model.addAttribute("nextpage", 2);
-        model.addAttribute("posts", posts);
+        model.addAttribute("beginIndex", pager.getPage(1).getFirstPage());
+        model.addAttribute("endIndex", pager.getPage(1).getLastPage());
+        model.addAttribute("currentIndex", 1);
+        model.addAttribute("totalPageCount", pager.getNumberOfPages());
+        model.addAttribute("posts", pager.getPage(1).getContents());
 
         return "index";
     }
@@ -105,12 +106,13 @@ public class TwibbleController {
         configuration = configurationService.getConfiguration(1);
         model.addAttribute("configuration", configuration);
 
-        List<Post> posts;
+        Pager<Post> pager = new Pager<>(postService.getAllPosts(),configuration.getNumberOfPostsToDisplay());
 
-        posts = postService.getPostByPage(page, configuration.getNumberOfPostsToDisplay());
-
-        model.addAttribute("nextpage", page+1);
-        model.addAttribute("posts", posts);
+        model.addAttribute("beginIndex", pager.getPage(page).getFirstPage());
+        model.addAttribute("endIndex", pager.getPage(page).getLastPage());
+        model.addAttribute("currentIndex", page);
+        model.addAttribute("totalPageCount", pager.getNumberOfPages());
+        model.addAttribute("posts", pager.getPage(page).getContents());
 
         return "index";
     }
@@ -269,11 +271,9 @@ public class TwibbleController {
             post.setPostUser(user);
             postService.updatePost(post);
             result = "redirect:" + configuration.getBlogBaseURL();
-            System.out.println("Did the update!!!");
         } else {
             redirectAttributes.addFlashAttribute("message", "Insufficient privileges to edit other users post!");
             result = "redirect:/admin/message";
-            System.out.println("Didn't do the update!!!");
         }
 
         return result;

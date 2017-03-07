@@ -71,4 +71,9 @@ public class PostServiceImpl implements PostService {
         return postDAO.getPostByPage(pageNumber, numberOfPosts);
 
     }
+
+    public int getNumberOfPosts() {
+        return postDAO.getNumberOfPosts();
+    }
+
 }

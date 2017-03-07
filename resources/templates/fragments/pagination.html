@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body th:fragment="pagination"><!-- pagination -->
+
+<div id="paginator">
+    <ul class="pager">
+        <li th:class="${currentIndex == 1}? 'disabled' : ''"><span
+                th:if='${currentIndex == 1}'>First</span> <a
+                th:if='${currentIndex != 1}' th:href="'/post/page/' + 1">First</a>
+        </li>
+        <li th:class="${currentIndex != 1}? '' : 'disabled'"><span
+                th:if='${currentIndex == 1}'>&larr;</span> <a
+                th:if='${currentIndex != 1}'
+                th:href="@{'/post/page/' + ${currentIndex - 1}|}"
+                title='Go to previous page'>&larr;</a></li>
+
+        <li th:each="item : ${#numbers.sequence(beginIndex,endIndex)}"
+            th:class="${item == currentIndex ? 'disabled' : '' }"><span
+                th:if='${item == currentIndex}' th:text='${item}'>1</span> <a
+                th:if='${item != currentIndex}' th:href="'/post/page/' + ${item}">
+            <span th:text='${item}'>1</span>
+        </a></li>
+
+        <li th:class="${currentIndex != totalPageCount}? '' : 'disabled'">
+            <span th:if='${currentIndex == totalPageCount}'>&rarr;</span> <a
+                th:if='${currentIndex != totalPageCount}'
+                th:href="@{'/post/page/' + ${currentIndex + 1}|}"
+                title='Go to next page'>&rarr;</a>
+        </li>
+        <li th:class="${currentIndex == totalPageCount}? 'disabled' : ''">
+            <span th:if='${currentIndex == totalPageCount}'>Last</span> <a
+                th:if='${currentIndex != totalPageCount}'
+                th:href="@{'/post/page/' + ${totalPageCount}|}">Last</a>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>

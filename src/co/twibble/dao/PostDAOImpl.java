@@ -119,5 +119,12 @@ public class PostDAOImpl extends AbstractDAO implements PostDAO {
 
     }
 
+    public int getNumberOfPosts() {
+
+        Query query = getSession().createQuery("from Post where postStatus = :postStatus order by postDate desc")
+                .setParameter("postStatus", PostStatus.PUBLISHED);
+
+        return query.list().size();
+    }
 
 }

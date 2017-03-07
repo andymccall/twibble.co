@@ -22,4 +22,6 @@ public interface PostDAO {
     public List<Post> getPostByYearMonth(int year, int month);
     public List<Post> getPostByYearMonthDay(int year, int month, int day);
     public List<Post> getPostByPage(int pageNumber, int numberOfPosts);
+    public int getNumberOfPosts();
+
 }

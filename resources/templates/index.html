@@ -48,12 +48,10 @@
                     <hr></hr>
                 </div>
 
-                <!-- Pager -->
-                <ul class="pager">
-                    <li class="next">
-                        <a th:href="'/post/page/' + ${nextpage}">Older Posts &rarr;</a>
-                    </li>
-                </ul>
+
+                <div th:include="fragments/pagination :: pagination"></div>
+
+
             </div>
         </div>
     </div>
